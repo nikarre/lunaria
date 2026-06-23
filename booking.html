@@ -4,80 +4,78 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lunaria — Запись</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
 <style>
     * { box-sizing: border-box; }
     body {
         margin: 0;
-        font-family: Georgia, 'Times New Roman', serif;
-        color: #e7e2f7;
-        background: radial-gradient(circle at 50% 0%, #1b1048, #0a0e2a 60%);
+        font-family: 'EB Garamond', Georgia, serif;
+        color: #d9d3ec;
+        background: radial-gradient(ellipse at 50% 0%, #16103e, #080b22 62%);
         min-height: 100vh;
     }
     nav {
-        display: flex; gap: 28px; align-items: center;
-        padding: 20px 48px;
-        background: rgba(10,14,42,0.85);
-        border-bottom: 1px solid rgba(217,184,92,0.25);
+        display: flex; gap: 34px; align-items: center;
+        padding: 22px 54px;
+        background: rgba(8,11,34,0.9);
+        border-bottom: 1px solid rgba(198,166,100,0.18);
         position: sticky; top: 0; z-index: 10;
     }
-    nav .logo { font-size: 22px; letter-spacing: 3px; color: #d9b85c; margin-right: auto; font-variant: small-caps; }
-    nav a { text-decoration: none; color: #c9c2e4; letter-spacing: 1px; font-size: 15px; padding: 6px 4px; border-bottom: 1px solid transparent; }
-    nav a:hover, nav a.active { color: #d9b85c; border-bottom-color: #d9b85c; }
+    nav .logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; letter-spacing: 6px; color: #c6a664; margin-right: auto; font-weight: 500; text-transform: uppercase; }
+    nav a { text-decoration: none; color: #9b95bd; letter-spacing: 2px; font-size: 14px; text-transform: uppercase; padding-bottom: 3px; border-bottom: 1px solid transparent; }
+    nav a:hover, nav a.active { color: #c6a664; border-bottom-color: #c6a664; }
 
-    h1 { text-align: center; font-weight: normal; letter-spacing: 3px; font-variant: small-caps; color: #f2ecff; margin: 40px 0 6px; }
-    .sub { text-align: center; color: #9d96bf; margin-bottom: 36px; font-size: 16px; }
+    h1 { font-family: 'Cormorant Garamond', serif; text-align: center; font-weight: 400; letter-spacing: 5px; text-transform: uppercase; color: #efeaff; margin: 48px 0 6px; font-size: 38px; }
+    .sub { text-align: center; color: #837cab; margin-bottom: 44px; font-size: 16px; font-style: italic; }
 
-    .wrap { display: flex; gap: 44px; justify-content: center; flex-wrap: wrap; padding: 0 24px; }
+    .wrap { display: flex; gap: 52px; justify-content: center; flex-wrap: wrap; padding: 0 24px; }
 
-    form { display: flex; flex-direction: column; gap: 14px; width: 290px; }
-    form label { font-size: 13px; color: #9d96bf; letter-spacing: 1px; }
+    form { display: flex; flex-direction: column; gap: 16px; width: 300px; }
+    form label { font-size: 12px; color: #837cab; letter-spacing: 2px; text-transform: uppercase; }
     input, select {
-        padding: 10px 12px;
-        background: #150e38;
-        border: 1px solid rgba(217,184,92,0.4);
-        border-radius: 8px; color: #e7e2f7; font-size: 14px;
-        font-family: Georgia, serif;
+        padding: 11px 13px; background: #110c30;
+        border: 1px solid rgba(198,166,100,0.3); border-radius: 6px;
+        color: #d9d3ec; font-size: 15px; font-family: 'EB Garamond', serif;
     }
-    input:focus, select:focus { outline: none; border-color: #d9b85c; }
+    input:focus, select:focus { outline: none; border-color: #c6a664; }
     button {
-        margin-top: 8px; padding: 12px;
-        border: 1px solid #d9b85c; border-radius: 8px;
-        background: transparent; color: #d9b85c;
-        letter-spacing: 2px; font-size: 14px; cursor: pointer;
-        font-variant: small-caps; transition: 0.2s;
-        font-family: Georgia, serif;
+        margin-top: 10px; padding: 13px;
+        border: 1px solid #c6a664; border-radius: 6px;
+        background: transparent; color: #c6a664;
+        letter-spacing: 3px; font-size: 13px; cursor: pointer;
+        text-transform: uppercase; transition: 0.25s; font-family: 'EB Garamond', serif;
     }
-    button:hover { background: #d9b85c; color: #150e38; }
+    button:hover { background: #c6a664; color: #110c30; }
 
     .preview {
-        width: 320px;
-        border: 1px solid rgba(217,184,92,0.5);
-        border-radius: 16px; padding: 26px;
-        background: linear-gradient(160deg, #241a5e, #120b34);
+        width: 330px; border: 1px solid rgba(198,166,100,0.45);
+        border-radius: 14px; padding: 30px;
+        background: linear-gradient(165deg, #1c1547, #0f0a2c);
         align-self: flex-start;
-        box-shadow: 0 0 30px rgba(217,184,92,0.15);
     }
-    .preview h3 { margin: 0 0 18px; color: #d9b85c; font-weight: normal; letter-spacing: 2px; font-variant: small-caps; }
-    .preview .row { margin: 10px 0; font-size: 15px; color: #cfc8ea; }
-    .preview .row b { display: inline-block; width: 96px; color: #8f87b5; font-weight: normal; }
+    .preview h3 { margin: 0 0 22px; font-family: 'Cormorant Garamond', serif; color: #c6a664; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; font-size: 22px; }
+    .preview .row { margin: 12px 0; font-size: 16px; color: #c4bee0; }
+    .preview .row b { display: inline-block; width: 110px; color: #837cab; font-weight: 400; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
 
-    .bookings { max-width: 780px; margin: 44px auto 0; padding: 0 24px; }
+    .bookings { max-width: 800px; margin: 50px auto 0; padding: 0 24px; }
     table { width: 100%; border-collapse: collapse; }
-    th, td { border: 1px solid rgba(217,184,92,0.3); padding: 9px 12px; text-align: left; font-size: 14px; color: #cfc8ea; }
-    th { background: rgba(217,184,92,0.12); color: #d9b85c; font-weight: normal; letter-spacing: 1px; }
+    th, td { border: 1px solid rgba(198,166,100,0.22); padding: 10px 13px; text-align: left; font-size: 15px; color: #c4bee0; }
+    th { color: #c6a664; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; font-size: 12px; }
 
-    .faq { max-width: 780px; margin: 56px auto; padding: 0 24px; }
-    .faq h2 { color: #d9b85c; text-align: center; font-weight: normal; letter-spacing: 2px; font-variant: small-caps; }
-    .item { border: 1px solid rgba(217,184,92,0.25); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
-    .q { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; color: #e7e2f7; }
-    .a { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; padding: 0 20px; color: #a9a2cc; line-height: 1.6; }
-    .item.open .a { max-height: 140px; padding: 0 20px 16px; }
-    .sign { color: #d9b85c; }
+    .faq { max-width: 800px; margin: 64px auto; padding: 0 24px; }
+    .faq h2 { font-family: 'Cormorant Garamond', serif; color: #c6a664; text-align: center; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; font-size: 30px; }
+    .item { border: 1px solid rgba(198,166,100,0.2); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+    .q { padding: 17px 22px; cursor: pointer; display: flex; justify-content: space-between; color: #d9d3ec; font-size: 17px; }
+    .a { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; padding: 0 22px; color: #948dba; line-height: 1.7; font-style: italic; }
+    .item.open .a { max-height: 150px; padding: 0 22px 18px; }
+    .sign { color: #c6a664; }
 </style>
 </head>
 <body>
     <nav>
-        <span class="logo">✦ Lunaria</span>
+        <span class="logo">Lunaria</span>
         <a href="index.html">Главная</a>
         <a href="cards.html">Карты дня</a>
         <a href="booking.html" class="active">Запись</a>
@@ -115,7 +113,7 @@
         </form>
 
         <div class="preview">
-            <h3>☾ Ваша запись</h3>
+            <h3>Ваша запись</h3>
             <div class="row"><b>Имя</b><span id="pName">—</span></div>
             <div class="row"><b>Рождение</b><span id="pBirth">—</span></div>
             <div class="row"><b>Расклад</b><span id="pKind">Карта дня</span></div>

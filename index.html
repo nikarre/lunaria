@@ -4,99 +4,93 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lunaria — Таро и Астрология</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
 <style>
     * { box-sizing: border-box; }
     body {
         margin: 0;
-        font-family: Georgia, 'Times New Roman', serif;
-        color: #e7e2f7;
-        background: #0a0e2a;
+        font-family: 'EB Garamond', Georgia, serif;
+        color: #d9d3ec;
+        background: #080b22;
         overflow-x: hidden;
     }
     nav {
-        display: flex; gap: 28px; align-items: center;
-        padding: 20px 48px;
-        background: rgba(10,14,42,0.85);
-        border-bottom: 1px solid rgba(217,184,92,0.25);
+        display: flex; gap: 34px; align-items: center;
+        padding: 22px 54px;
+        background: rgba(8,11,34,0.9);
+        border-bottom: 1px solid rgba(198,166,100,0.18);
         position: sticky; top: 0; z-index: 10;
         backdrop-filter: blur(6px);
     }
-    nav .logo { font-size: 22px; letter-spacing: 3px; color: #d9b85c; margin-right: auto; font-variant: small-caps; }
-    nav a {
-        text-decoration: none; color: #c9c2e4; letter-spacing: 1px;
-        font-size: 15px; padding: 6px 4px; border-bottom: 1px solid transparent;
-        transition: 0.2s;
+    nav .logo {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 26px; letter-spacing: 6px; color: #c6a664;
+        margin-right: auto; font-weight: 500; text-transform: uppercase;
     }
-    nav a:hover, nav a.active { color: #d9b85c; border-bottom-color: #d9b85c; }
+    nav a {
+        text-decoration: none; color: #9b95bd; letter-spacing: 2px;
+        font-size: 14px; text-transform: uppercase;
+        padding-bottom: 3px; border-bottom: 1px solid transparent; transition: 0.25s;
+    }
+    nav a:hover, nav a.active { color: #c6a664; border-bottom-color: #c6a664; }
 
     .hero {
-        position: relative;
-        min-height: 86vh;
+        position: relative; min-height: 88vh;
         display: flex; flex-direction: column;
-        align-items: center; justify-content: center;
-        text-align: center;
-        background:
-            radial-gradient(circle at 50% 30%, #2a1a5c 0%, #140b35 45%, #0a0e2a 100%);
+        align-items: center; justify-content: center; text-align: center;
+        background: radial-gradient(ellipse at 50% 32%, #1d1545 0%, #0f0b30 48%, #080b22 100%);
         overflow: hidden;
     }
     .stars { position: absolute; inset: 0; pointer-events: none; }
-    .star {
-        position: absolute; width: 2px; height: 2px;
-        background: #fff; border-radius: 50%; opacity: 0.7;
-        animation: twinkle 3s infinite ease-in-out;
-    }
-    @keyframes twinkle { 0%,100% { opacity: 0.2; } 50% { opacity: 0.9; } }
+    .star { position: absolute; width: 1.5px; height: 1.5px; background: #fff; border-radius: 50%; opacity: 0.6; animation: tw 4s infinite ease-in-out; }
+    @keyframes tw { 0%,100% { opacity: 0.12; } 50% { opacity: 0.7; } }
 
-    .face { display: flex; gap: 46px; margin-bottom: 40px; z-index: 2; }
+    .face { display: flex; gap: 70px; margin-bottom: 52px; z-index: 2; }
     .eye {
         position: relative;
-        width: 110px; height: 110px;
+        width: 150px; height: 78px;
+        border: 1px solid rgba(198,166,100,0.85);
         border-radius: 50%;
-        background: radial-gradient(circle at 50% 50%, #1a1240, #0d0922);
-        border: 2px solid #d9b85c;
-        box-shadow: 0 0 26px rgba(217,184,92,0.35);
+        background: radial-gradient(ellipse at 50% 50%, #140e34, #0a0720);
         display: flex; align-items: center; justify-content: center;
+        overflow: hidden;
     }
     .iris {
         position: relative;
-        width: 46px; height: 46px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 40% 40%, #c79bff, #5a2ea6 60%, #2a1158);
-        transition: transform 0.05s linear;
+        width: 40px; height: 40px; border-radius: 50%;
+        background: radial-gradient(circle at 42% 40%, #b8a0e8, #6a4aa6 55%, #2c1a55);
+        transition: transform 0.06s linear;
     }
-    .iris::after {
-        content: ""; position: absolute; top: 14px; left: 14px;
-        width: 18px; height: 18px; border-radius: 50%; background: #0a0420;
-    }
+    .iris::after { content: ""; position: absolute; top: 12px; left: 12px; width: 16px; height: 16px; border-radius: 50%; background: #07041a; }
+    .iris::before { content: ""; position: absolute; top: 8px; left: 22px; width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); }
 
     .hero h1 {
-        font-size: 56px; margin: 0 0 14px; letter-spacing: 4px;
-        font-weight: normal; color: #f2ecff; z-index: 2;
-        font-variant: small-caps;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 68px; margin: 0 0 18px; letter-spacing: 6px;
+        font-weight: 400; color: #efeaff; z-index: 2; text-transform: uppercase;
     }
-    .hero h1 .gold { color: #d9b85c; }
-    .hero p { font-size: 19px; max-width: 540px; color: #b9b1d8; z-index: 2; line-height: 1.6; }
-    .hint {
-        margin-top: 28px; z-index: 2;
-        font-size: 14px; letter-spacing: 1px; color: #8f87b5;
-    }
-    .hint b { color: #d9b85c; }
+    .hero h1 .gold { color: #c6a664; font-style: italic; }
+    .hero p { font-size: 21px; max-width: 540px; color: #a39cc4; z-index: 2; line-height: 1.7; font-style: italic; }
+    .hint { margin-top: 34px; z-index: 2; font-size: 13px; letter-spacing: 2px; color: #6f6896; text-transform: uppercase; }
+    .hint b { color: #c6a664; font-weight: 400; }
 
     .shoot {
-        position: fixed; top: 0; left: 0;
-        width: 2px; height: 2px; background: #fff;
-        box-shadow: 0 0 8px 2px #d9b85c, -60px 0 30px 1px rgba(255,255,255,0.25);
+        position: fixed; top: 0; left: 0; width: 2px; height: 2px; background: #fff;
+        box-shadow: 0 0 8px 2px #c6a664, -60px 0 30px 1px rgba(255,255,255,0.2);
         border-radius: 50%; pointer-events: none; z-index: 30;
     }
 
-    .about { max-width: 720px; margin: 80px auto; padding: 0 24px; text-align: center; }
-    .about h2 { color: #d9b85c; font-weight: normal; letter-spacing: 2px; font-size: 30px; font-variant: small-caps; }
-    .about p { color: #b9b1d8; line-height: 1.8; font-size: 17px; }
+    .about { max-width: 700px; margin: 96px auto; padding: 0 24px; text-align: center; }
+    .about h2 { font-family: 'Cormorant Garamond', serif; color: #c6a664; font-weight: 400; letter-spacing: 4px; font-size: 34px; text-transform: uppercase; }
+    .about .rule { width: 60px; height: 1px; background: #c6a664; margin: 18px auto 26px; opacity: 0.6; }
+    .about p { color: #a39cc4; line-height: 1.9; font-size: 18px; }
 </style>
 </head>
 <body>
     <nav>
-        <span class="logo">✦ Lunaria</span>
+        <span class="logo">Lunaria</span>
         <a href="index.html" class="active">Главная</a>
         <a href="cards.html">Карты дня</a>
         <a href="booking.html">Запись</a>
@@ -110,13 +104,14 @@
             <div class="eye"><div class="iris" data-iris></div></div>
         </div>
 
-        <h1>Таро <span class="gold">&amp;</span> Астрология</h1>
+        <h1>Таро <span class="gold">и</span> Астрология</h1>
         <p>Я читаю карты и звёзды. Загляни в глаза — они следят за тобой. Позволь судьбе приоткрыть завесу.</p>
-        <div class="hint">Нажми любую клавишу — и по небу пролетит звезда ✦</div>
+        <div class="hint">Нажми любую клавишу — и по небу пролетит звезда</div>
     </section>
 
     <section class="about">
         <h2>Обо мне</h2>
+        <div class="rule"></div>
         <p>Меня зовут Ника. Уже четыре года я помогаю людям услышать себя через карты Таро и натальные карты. Это не предсказание будущего, а разговор с собственной интуицией — мягкий, честный и без осуждения.</p>
     </section>
 
@@ -127,7 +122,7 @@ for (let i = 0; i < 90; i++) {
     s.className = "star";
     s.style.left = Math.random() * 100 + "%";
     s.style.top = Math.random() * 100 + "%";
-    s.style.animationDelay = Math.random() * 3 + "s";
+    s.style.animationDelay = Math.random() * 4 + "s";
     stars.append(s);
 }
 
@@ -140,9 +135,8 @@ document.addEventListener("mousemove", function (e) {
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
         const angle = Math.atan2(e.clientY - cy, e.clientX - cx);
-        const radius = 22;
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
+        const x = Math.cos(angle) * 32;
+        const y = Math.sin(angle) * 14;
         iris.style.transform = "translate(" + x + "px," + y + "px)";
     });
 });
@@ -150,23 +144,18 @@ document.addEventListener("mousemove", function (e) {
 function shootingStar() {
     const star = document.createElement("div");
     star.className = "shoot";
-    const startX = Math.random() * window.innerWidth * 0.6;
-    star.style.left = startX + "px";
+    star.style.left = (Math.random() * window.innerWidth * 0.6) + "px";
     star.style.top = (Math.random() * window.innerHeight * 0.4) + "px";
     document.body.append(star);
-
     const dist = 600 + Math.random() * 300;
     star.animate([
         { transform: "translate(0,0)", opacity: 1 },
         { transform: "translate(" + dist + "px," + dist * 0.6 + "px)", opacity: 0 }
     ], { duration: 900, easing: "ease-in" });
-
     setTimeout(function () { star.remove(); }, 900);
 }
 
-document.addEventListener("keydown", function () {
-    shootingStar();
-});
+document.addEventListener("keydown", function () { shootingStar(); });
 </script>
 </body>
 </html>
