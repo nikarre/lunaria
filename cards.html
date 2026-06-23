@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunaria — Карты дня</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        color: #e7e2f7;
+        background: radial-gradient(circle at 50% 0%, #1b1048, #0a0e2a 60%);
+        min-height: 100vh;
+    }
+    nav {
+        display: flex; gap: 28px; align-items: center;
+        padding: 20px 48px;
+        background: rgba(10,14,42,0.85);
+        border-bottom: 1px solid rgba(217,184,92,0.25);
+        position: sticky; top: 0; z-index: 10;
+    }
+    nav .logo { font-size: 22px; letter-spacing: 3px; color: #d9b85c; margin-right: auto; font-variant: small-caps; }
+    nav a { text-decoration: none; color: #c9c2e4; letter-spacing: 1px; font-size: 15px; padding: 6px 4px; border-bottom: 1px solid transparent; }
+    nav a:hover, nav a.active { color: #d9b85c; border-bottom-color: #d9b85c; }
+
+    h1 { text-align: center; font-weight: normal; letter-spacing: 3px; font-variant: small-caps; color: #f2ecff; margin: 40px 0 6px; }
+    .sub { text-align: center; color: #9d96bf; margin-bottom: 36px; font-size: 16px; }
+    .sub b { color: #d9b85c; }
+
+    .deck {
+        display: flex; gap: 22px; justify-content: center; flex-wrap: wrap;
+        padding: 0 20px 60px;
+        perspective: 1200px;
+    }
+    .card {
+        width: 150px; height: 240px;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.2s;
+    }
+    .card.sel { transform: translateY(-14px); }
+    .card.sel .inner { box-shadow: 0 0 26px rgba(217,184,92,0.7); border-radius: 12px; }
+    .inner {
+        position: absolute; inset: 0;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+    }
+    .card.flipped .inner { transform: rotateY(180deg); }
+
+    .side {
+        position: absolute; inset: 0;
+        backface-visibility: hidden;
+        border-radius: 12px;
+        border: 2px solid #d9b85c;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: 14px; text-align: center;
+    }
+    .back {
+        background:
+            repeating-linear-gradient(45deg, #1c1250 0 8px, #241863 8px 16px);
+    }
+    .back .mark { font-size: 40px; color: #d9b85c; }
+    .front {
+        transform: rotateY(180deg);
+        background: linear-gradient(160deg, #241a5e, #140d38);
+    }
+    .front .num { color: #d9b85c; letter-spacing: 2px; font-size: 13px; }
+    .front .sym { font-size: 46px; margin: 10px 0; color: #d9b85c; }
+    .front .name { font-variant: small-caps; letter-spacing: 1px; font-size: 18px; color: #f2ecff; }
+    .front .mean { font-size: 12px; color: #a9a2cc; margin-top: 8px; line-height: 1.4; }
+
+    .tip { text-align: center; color: #9d96bf; padding-bottom: 50px; font-size: 14px; }
+    .tip b { color: #d9b85c; }
+</style>
+</head>
+<body>
+    <nav>
+        <span class="logo">✦ Lunaria</span>
+        <a href="index.html">Главная</a>
+        <a href="cards.html" class="active">Карты дня</a>
+        <a href="booking.html">Запись</a>
+    </nav>
+
+    <h1>Вытяни свою карту</h1>
+    <p class="sub">Клик по карте — перевернуть. Стрелки <b>← →</b> выбирают, <b>Enter</b> открывает, <b>Esc</b> закрывает все.</p>
+
+    <div class="deck" id="deck"></div>
+
+    <p class="tip">Сосредоточься на вопросе и доверься первому порыву ✦</p>
+
+<script>
+const arcana = [
+    { num: "I", sym: "✶", name: "Маг", mean: "Сила воли, начало, всё в твоих руках" },
+    { num: "II", sym: "☾", name: "Жрица", mean: "Интуиция, тайна, внутренний голос" },
+    { num: "III", sym: "❀", name: "Императрица", mean: "Изобилие, забота, творчество" },
+    { num: "VII", sym: "⚔", name: "Колесница", mean: "Движение вперёд, контроль, победа" },
+    { num: "XVII", sym: "✦", name: "Звезда", mean: "Надежда, вдохновение, исцеление" },
+    { num: "XVIII", sym: "☽", name: "Луна", mean: "Иллюзии, сны, скрытые чувства" }
+];
+
+const deck = document.getElementById("deck");
+let selected = 0;
+
+arcana.forEach(function (a, i) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML =
+        '<div class="inner">' +
+            '<div class="side back"><div class="mark">✦</div></div>' +
+            '<div class="side front">' +
+                '<div class="num">' + a.num + '</div>' +
+                '<div class="sym">' + a.sym + '</div>' +
+                '<div class="name">' + a.name + '</div>' +
+                '<div class="mean">' + a.mean + '</div>' +
+            '</div>' +
+        '</div>';
+    card.addEventListener("click", function () {
+        card.classList.toggle("flipped");
+    });
+    deck.append(card);
+});
+
+const cards = deck.querySelectorAll(".card");
+
+function highlight() {
+    cards.forEach(function (c, i) {
+        c.classList.toggle("sel", i === selected);
+    });
+}
+highlight();
+
+document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") { selected = (selected + 1) % cards.length; highlight(); }
+    if (e.key === "ArrowLeft") { selected = (selected - 1 + cards.length) % cards.length; highlight(); }
+    if (e.key === "Enter") { cards[selected].classList.toggle("flipped"); }
+    if (e.key === "Escape") { cards.forEach(function (c) { c.classList.remove("flipped"); }); }
+});
+</script>
+</body>
+</html>

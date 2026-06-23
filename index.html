@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunaria — Таро и Астрология</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        color: #e7e2f7;
+        background: #0a0e2a;
+        overflow-x: hidden;
+    }
+    nav {
+        display: flex; gap: 28px; align-items: center;
+        padding: 20px 48px;
+        background: rgba(10,14,42,0.85);
+        border-bottom: 1px solid rgba(217,184,92,0.25);
+        position: sticky; top: 0; z-index: 10;
+        backdrop-filter: blur(6px);
+    }
+    nav .logo { font-size: 22px; letter-spacing: 3px; color: #d9b85c; margin-right: auto; font-variant: small-caps; }
+    nav a {
+        text-decoration: none; color: #c9c2e4; letter-spacing: 1px;
+        font-size: 15px; padding: 6px 4px; border-bottom: 1px solid transparent;
+        transition: 0.2s;
+    }
+    nav a:hover, nav a.active { color: #d9b85c; border-bottom-color: #d9b85c; }
+
+    .hero {
+        position: relative;
+        min-height: 86vh;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        text-align: center;
+        background:
+            radial-gradient(circle at 50% 30%, #2a1a5c 0%, #140b35 45%, #0a0e2a 100%);
+        overflow: hidden;
+    }
+    .stars { position: absolute; inset: 0; pointer-events: none; }
+    .star {
+        position: absolute; width: 2px; height: 2px;
+        background: #fff; border-radius: 50%; opacity: 0.7;
+        animation: twinkle 3s infinite ease-in-out;
+    }
+    @keyframes twinkle { 0%,100% { opacity: 0.2; } 50% { opacity: 0.9; } }
+
+    .face { display: flex; gap: 46px; margin-bottom: 40px; z-index: 2; }
+    .eye {
+        position: relative;
+        width: 110px; height: 110px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 50% 50%, #1a1240, #0d0922);
+        border: 2px solid #d9b85c;
+        box-shadow: 0 0 26px rgba(217,184,92,0.35);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .iris {
+        position: relative;
+        width: 46px; height: 46px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 40%, #c79bff, #5a2ea6 60%, #2a1158);
+        transition: transform 0.05s linear;
+    }
+    .iris::after {
+        content: ""; position: absolute; top: 14px; left: 14px;
+        width: 18px; height: 18px; border-radius: 50%; background: #0a0420;
+    }
+
+    .hero h1 {
+        font-size: 56px; margin: 0 0 14px; letter-spacing: 4px;
+        font-weight: normal; color: #f2ecff; z-index: 2;
+        font-variant: small-caps;
+    }
+    .hero h1 .gold { color: #d9b85c; }
+    .hero p { font-size: 19px; max-width: 540px; color: #b9b1d8; z-index: 2; line-height: 1.6; }
+    .hint {
+        margin-top: 28px; z-index: 2;
+        font-size: 14px; letter-spacing: 1px; color: #8f87b5;
+    }
+    .hint b { color: #d9b85c; }
+
+    .shoot {
+        position: fixed; top: 0; left: 0;
+        width: 2px; height: 2px; background: #fff;
+        box-shadow: 0 0 8px 2px #d9b85c, -60px 0 30px 1px rgba(255,255,255,0.25);
+        border-radius: 50%; pointer-events: none; z-index: 30;
+    }
+
+    .about { max-width: 720px; margin: 80px auto; padding: 0 24px; text-align: center; }
+    .about h2 { color: #d9b85c; font-weight: normal; letter-spacing: 2px; font-size: 30px; font-variant: small-caps; }
+    .about p { color: #b9b1d8; line-height: 1.8; font-size: 17px; }
+</style>
+</head>
+<body>
+    <nav>
+        <span class="logo">✦ Lunaria</span>
+        <a href="index.html" class="active">Главная</a>
+        <a href="cards.html">Карты дня</a>
+        <a href="booking.html">Запись</a>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="stars" id="stars"></div>
+
+        <div class="face">
+            <div class="eye"><div class="iris" data-iris></div></div>
+            <div class="eye"><div class="iris" data-iris></div></div>
+        </div>
+
+        <h1>Таро <span class="gold">&amp;</span> Астрология</h1>
+        <p>Я читаю карты и звёзды. Загляни в глаза — они следят за тобой. Позволь судьбе приоткрыть завесу.</p>
+        <div class="hint">Нажми любую клавишу — и по небу пролетит звезда ✦</div>
+    </section>
+
+    <section class="about">
+        <h2>Обо мне</h2>
+        <p>Меня зовут Ника. Уже четыре года я помогаю людям услышать себя через карты Таро и натальные карты. Это не предсказание будущего, а разговор с собственной интуицией — мягкий, честный и без осуждения.</p>
+    </section>
+
+<script>
+const stars = document.getElementById("stars");
+for (let i = 0; i < 90; i++) {
+    const s = document.createElement("div");
+    s.className = "star";
+    s.style.left = Math.random() * 100 + "%";
+    s.style.top = Math.random() * 100 + "%";
+    s.style.animationDelay = Math.random() * 3 + "s";
+    stars.append(s);
+}
+
+const irises = document.querySelectorAll("[data-iris]");
+
+document.addEventListener("mousemove", function (e) {
+    irises.forEach(function (iris) {
+        const eye = iris.parentElement;
+        const rect = eye.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const angle = Math.atan2(e.clientY - cy, e.clientX - cx);
+        const radius = 22;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        iris.style.transform = "translate(" + x + "px," + y + "px)";
+    });
+});
+
+function shootingStar() {
+    const star = document.createElement("div");
+    star.className = "shoot";
+    const startX = Math.random() * window.innerWidth * 0.6;
+    star.style.left = startX + "px";
+    star.style.top = (Math.random() * window.innerHeight * 0.4) + "px";
+    document.body.append(star);
+
+    const dist = 600 + Math.random() * 300;
+    star.animate([
+        { transform: "translate(0,0)", opacity: 1 },
+        { transform: "translate(" + dist + "px," + dist * 0.6 + "px)", opacity: 0 }
+    ], { duration: 900, easing: "ease-in" });
+
+    setTimeout(function () { star.remove(); }, 900);
+}
+
+document.addEventListener("keydown", function () {
+    shootingStar();
+});
+</script>
+</body>
+</html>

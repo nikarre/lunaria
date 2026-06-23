@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunaria — Запись</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        color: #e7e2f7;
+        background: radial-gradient(circle at 50% 0%, #1b1048, #0a0e2a 60%);
+        min-height: 100vh;
+    }
+    nav {
+        display: flex; gap: 28px; align-items: center;
+        padding: 20px 48px;
+        background: rgba(10,14,42,0.85);
+        border-bottom: 1px solid rgba(217,184,92,0.25);
+        position: sticky; top: 0; z-index: 10;
+    }
+    nav .logo { font-size: 22px; letter-spacing: 3px; color: #d9b85c; margin-right: auto; font-variant: small-caps; }
+    nav a { text-decoration: none; color: #c9c2e4; letter-spacing: 1px; font-size: 15px; padding: 6px 4px; border-bottom: 1px solid transparent; }
+    nav a:hover, nav a.active { color: #d9b85c; border-bottom-color: #d9b85c; }
+
+    h1 { text-align: center; font-weight: normal; letter-spacing: 3px; font-variant: small-caps; color: #f2ecff; margin: 40px 0 6px; }
+    .sub { text-align: center; color: #9d96bf; margin-bottom: 36px; font-size: 16px; }
+
+    .wrap { display: flex; gap: 44px; justify-content: center; flex-wrap: wrap; padding: 0 24px; }
+
+    form { display: flex; flex-direction: column; gap: 14px; width: 290px; }
+    form label { font-size: 13px; color: #9d96bf; letter-spacing: 1px; }
+    input, select {
+        padding: 10px 12px;
+        background: #150e38;
+        border: 1px solid rgba(217,184,92,0.4);
+        border-radius: 8px; color: #e7e2f7; font-size: 14px;
+        font-family: Georgia, serif;
+    }
+    input:focus, select:focus { outline: none; border-color: #d9b85c; }
+    button {
+        margin-top: 8px; padding: 12px;
+        border: 1px solid #d9b85c; border-radius: 8px;
+        background: transparent; color: #d9b85c;
+        letter-spacing: 2px; font-size: 14px; cursor: pointer;
+        font-variant: small-caps; transition: 0.2s;
+        font-family: Georgia, serif;
+    }
+    button:hover { background: #d9b85c; color: #150e38; }
+
+    .preview {
+        width: 320px;
+        border: 1px solid rgba(217,184,92,0.5);
+        border-radius: 16px; padding: 26px;
+        background: linear-gradient(160deg, #241a5e, #120b34);
+        align-self: flex-start;
+        box-shadow: 0 0 30px rgba(217,184,92,0.15);
+    }
+    .preview h3 { margin: 0 0 18px; color: #d9b85c; font-weight: normal; letter-spacing: 2px; font-variant: small-caps; }
+    .preview .row { margin: 10px 0; font-size: 15px; color: #cfc8ea; }
+    .preview .row b { display: inline-block; width: 96px; color: #8f87b5; font-weight: normal; }
+
+    .bookings { max-width: 780px; margin: 44px auto 0; padding: 0 24px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid rgba(217,184,92,0.3); padding: 9px 12px; text-align: left; font-size: 14px; color: #cfc8ea; }
+    th { background: rgba(217,184,92,0.12); color: #d9b85c; font-weight: normal; letter-spacing: 1px; }
+
+    .faq { max-width: 780px; margin: 56px auto; padding: 0 24px; }
+    .faq h2 { color: #d9b85c; text-align: center; font-weight: normal; letter-spacing: 2px; font-variant: small-caps; }
+    .item { border: 1px solid rgba(217,184,92,0.25); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+    .q { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; color: #e7e2f7; }
+    .a { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; padding: 0 20px; color: #a9a2cc; line-height: 1.6; }
+    .item.open .a { max-height: 140px; padding: 0 20px 16px; }
+    .sign { color: #d9b85c; }
+</style>
+</head>
+<body>
+    <nav>
+        <span class="logo">✦ Lunaria</span>
+        <a href="index.html">Главная</a>
+        <a href="cards.html">Карты дня</a>
+        <a href="booking.html" class="active">Запись</a>
+    </nav>
+
+    <h1>Запись на расклад</h1>
+    <p class="sub">Заполни форму — карточка справа меняется на лету. Enter — записаться.</p>
+
+    <div class="wrap">
+        <form name="booking">
+            <label>Ваше имя</label>
+            <input name="name" placeholder="Ника">
+
+            <label>Дата рождения</label>
+            <input name="birth" type="date">
+
+            <label>Тип расклада</label>
+            <select name="kind">
+                <option>Карта дня</option>
+                <option>Расклад на любовь</option>
+                <option>Натальная карта</option>
+                <option>Год вперёд</option>
+            </select>
+
+            <label>Формат</label>
+            <select name="format">
+                <option>Онлайн</option>
+                <option>Лично</option>
+            </select>
+
+            <label>Дата сеанса</label>
+            <input name="date" type="date">
+
+            <button type="submit">Записаться</button>
+        </form>
+
+        <div class="preview">
+            <h3>☾ Ваша запись</h3>
+            <div class="row"><b>Имя</b><span id="pName">—</span></div>
+            <div class="row"><b>Рождение</b><span id="pBirth">—</span></div>
+            <div class="row"><b>Расклад</b><span id="pKind">Карта дня</span></div>
+            <div class="row"><b>Формат</b><span id="pFormat">Онлайн</span></div>
+            <div class="row"><b>Сеанс</b><span id="pDate">—</span></div>
+        </div>
+    </div>
+
+    <div class="bookings">
+        <table>
+            <tr><th>Имя</th><th>Рождение</th><th>Расклад</th><th>Формат</th><th>Сеанс</th></tr>
+        </table>
+    </div>
+
+    <div class="faq">
+        <h2>Частые вопросы</h2>
+        <div class="item">
+            <div class="q">Таро предсказывает будущее? <span class="sign">+</span></div>
+            <div class="a">Нет. Карты отражают текущую ситуацию и помогают услышать собственную интуицию, а не дают жёсткий прогноз.</div>
+        </div>
+        <div class="item">
+            <div class="q">Что нужно для натальной карты? <span class="sign">+</span></div>
+            <div class="a">Дата, точное время и город рождения. По ним я строю карту и разбираю её вместе с вами.</div>
+        </div>
+        <div class="item">
+            <div class="q">Сколько длится сеанс? <span class="sign">+</span></div>
+            <div class="a">Обычно от 40 до 90 минут — в зависимости от типа расклада и ваших вопросов.</div>
+        </div>
+    </div>
+
+<script>
+const form = document.forms.booking;
+const table = document.querySelector("table");
+
+function update() {
+    document.getElementById("pName").textContent = form.name.value || "—";
+    document.getElementById("pBirth").textContent = form.birth.value || "—";
+    document.getElementById("pKind").textContent = form.kind.value;
+    document.getElementById("pFormat").textContent = form.format.value;
+    document.getElementById("pDate").textContent = form.date.value || "—";
+}
+
+form.addEventListener("input", update);
+
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const row = table.insertRow();
+    row.insertCell().textContent = form.name.value || "—";
+    row.insertCell().textContent = form.birth.value || "—";
+    row.insertCell().textContent = form.kind.value;
+    row.insertCell().textContent = form.format.value;
+    row.insertCell().textContent = form.date.value || "—";
+    form.reset();
+    update();
+});
+
+const items = document.querySelectorAll(".item");
+items.forEach(function (item) {
+    item.querySelector(".q").addEventListener("click", function () {
+        item.classList.toggle("open");
+        item.querySelector(".sign").textContent = item.classList.contains("open") ? "−" : "+";
+    });
+});
+</script>
+</body>
+</html>
